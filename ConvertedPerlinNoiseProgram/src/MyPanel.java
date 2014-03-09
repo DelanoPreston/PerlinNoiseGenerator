@@ -17,14 +17,14 @@ public class MyPanel extends JPanel{
 			for(int j = 0; j < Main.size; j++){
 				temp = Main.noiseMap[i][j];
 				
-				temp = temp + 1;
-				temp = temp * .5;
-				temp = temp* 255;
+//				temp = temp + 1;
+//				temp = temp * .5;
+//				temp = temp* 255;
 				
 				g.setColor(new Color((int)temp, (int)temp, (int)temp, 255));
 				
 //				g.drawRect(j * 16, i * 16, 16, 16);
-				g.fillRect(j * 16, i * 16, 16, 16);
+				g.fillRect(j * 2, i * 2, 2, 2);
 			}
 		}
 		
