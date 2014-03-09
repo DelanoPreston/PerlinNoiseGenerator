@@ -3,13 +3,18 @@ import javax.swing.JFrame;
 
 
 public class Main {
-	public static int size = 100;
+	public static int size = 96;
 	public static double[][] noiseMap;// = new double[size][size];
 //	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		IslandGenerator iGen = new IslandGenerator(size, size);
-		iGen.generateIsland(size, size, 1, 2);
+		iGen.generateIsland(size, size, 1, 16);
 		noiseMap = iGen.getMap();
+		
+//		PerlinNoise pn = new PerlinNoise(size, size, 10);
+//		noiseMap = pn.generate_noise(size, size, 1, 16);
+		
+		
 		
 		
 		

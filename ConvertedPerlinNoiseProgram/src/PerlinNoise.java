@@ -12,6 +12,13 @@ public class PerlinNoise {
 		noise_height = inHei;
 		random = new Random();
 	}
+	
+	public PerlinNoise(int inHei, int inWid, int seed) {
+		noise = new double[inHei][inWid];
+		noise_width = inWid;
+		noise_height = inHei;
+		random = new Random(seed);
+	}
 
 	public double[][] generate_noise(int width, int height, int frequency, int octaves) {
 
@@ -23,7 +30,7 @@ public class PerlinNoise {
 
 		for (int y = 0; y < this.noise_height; y++) {
 			for (int x = 0; x < this.noise_width; x++) {
-				noise[y][x] = random.nextInt(1000) / 1000;
+				noise[y][x] = random.nextInt(1000) / 1000.0;
 			}
 		}
 
@@ -31,11 +38,11 @@ public class PerlinNoise {
 
 		for (int y = 0; y < this.noise_height; y++) {
 			for (int x = 0; x < this.noise_width; x++) {
-				noise[y][x] = (int)(this.turbulence(x*frequency, y*frequency, octaves));
+				noise[y][x] = (this.turbulence(x * frequency, y * frequency, octaves));
 			}
 		}
 
-		 return noise;
+		return noise;
 	}
 
 	public double smooth_noise(int x, int y) {
@@ -74,7 +81,13 @@ public class PerlinNoise {
 			value += this.smooth_noise(x / size, y / size) * size;
 			size /= 2.0;
 		}
+		double temp = 128.0 * value / initial_size;
+		if (temp > 255) {
+			int i = 0;
+			if (i == 1) {
 
-		return 128.0 * value / initial_size;
+			}
+		}
+		return temp;
 	}
 }
