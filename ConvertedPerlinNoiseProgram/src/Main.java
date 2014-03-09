@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 
 public class Main {
-	public static int size = 96;
+	public static int size = 256;
 	public static double[][] noiseMap;// = new double[size][size];
 //	@SuppressWarnings("static-access")
 	public static void main(String[] args) {

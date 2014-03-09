@@ -63,7 +63,7 @@ public class IslandGenerator {
 //			int x = random.nextInt(width);
 //			int y = random.nextInt(height);
 
-			for (int j = 0; j < (height * width) * .05; j++) {
+			for (int j = 0; j < (height * width) ; j++) {
 				// System.out.println(j + "," + i);
 				particleMap[y][x] += 7;
 				if (particleMap[y][x] >= 255)
@@ -119,7 +119,7 @@ public class IslandGenerator {
 		}
 
 		smoothen();
-		smoothen();
+//		smoothen();
 //		smoothen();
 //		smoothen();
 //		smoothen();
