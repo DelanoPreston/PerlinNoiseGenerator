@@ -7,10 +7,12 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MyPanel extends JPanel {
-	int boxSize = 2;
-	public static int size = 196;
+	int boxSize = 4;
+	public static int size = 128;
 	public static double[][] noiseMap;
 	KeyboardListener source;
+	int[] colorKey = { 201, 211, 224, 240 };
+	int[] counter = new int[256];// number of values - 0 to 255
 
 	public MyPanel() {
 		setFocusable(true);
@@ -28,20 +30,54 @@ public class MyPanel extends JPanel {
 		super.paintComponent(g);
 		double temp = 0.0;
 		if (noiseMap != null) {
+			for (int i = 0; i < colorKey.length; i++) {// sets colorKey to 0
+				colorKey[i] = 0;
+			}
+			for (int i = 0; i < counter.length; i++) {// sets counter to 0
+				counter[i] = 0;
+			}
+			for (int i = 0; i < size; i++) {// counts values
+				for (int j = 0; j < size; j++) {
+					counter[(int) noiseMap[i][j]]++;
+				}
+			}
+
+			int totalValues = size * size;
+			int tempInt = 0;
+			for (int i = 0; i < counter.length; i++) {// sets counter to 0
+				tempInt += counter[i];
+				if (tempInt >= totalValues * .65 && colorKey[0] == 0) {
+					colorKey[0] = i;
+					tempInt = 0;
+				}
+				if (tempInt >= totalValues * .1 && colorKey[1] == 0 && colorKey[0] != 0) {
+					colorKey[1] = i;
+					tempInt = 0;
+				}
+				if (tempInt >= totalValues * .1 && colorKey[2] == 0 && colorKey[1] != 0) {
+					colorKey[2] = i;
+					tempInt = 0;
+				}
+				if (tempInt >= totalValues * .1 && colorKey[3] == 0 && colorKey[2] != 0) {
+					colorKey[3] = i;
+					tempInt = 0;
+				}
+			}
+
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
 					temp = noiseMap[i][j];
 
 					if (temp <= 255 && temp >= 0) {
-						if (temp >= 0 && temp <= 195) {
+						if (temp >= 0 && temp <= colorKey[0] - 1) {
 							g.setColor(new Color(0, (int) (temp * .1), (int) temp, 255));
-						} else if (temp >= 196 && temp <= 210) {
+						} else if (temp >= colorKey[0] && temp <= colorKey[1] - 1) {
 							g.setColor(new Color((int) (temp * .75), (int) (temp * .5), (int) (temp * .25), 255));
-						} else if (temp >= 211 && temp <= 223) {
+						} else if (temp >= colorKey[1] && temp <= colorKey[2] - 1) {
 							g.setColor(new Color(0, (int) (temp * .75), (int) (temp * .15), 255));
-						} else if (temp >= 224 && temp <= 239) {
+						} else if (temp >= colorKey[2] && temp <= colorKey[3] - 1) {
 							g.setColor(new Color((int) (temp * .15), (int) (temp * .5), (int) (temp * .15), 255));
-						} else if (temp >= 240 && temp <= 255) {
+						} else if (temp >= colorKey[3] && temp <= 255) {
 							temp = 255 - temp;
 							g.setColor(new Color((int) temp, (int) temp, (int) temp, 255));
 						}
@@ -80,7 +116,7 @@ public class MyPanel extends JPanel {
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			IslandGenerator iGen = new IslandGenerator(size, size, 10);
+			IslandGenerator iGen = new IslandGenerator(size, size);
 			int key = arg0.getKeyCode();
 			System.out.println(key);
 			if (key == KeyEvent.VK_SPACE) {
@@ -88,42 +124,15 @@ public class MyPanel extends JPanel {
 				noiseMap = iGen.getMap();
 				repaint();
 			}
-//			}else if (key == KeyEvent.VK_0) {
-//				iGen.generateIsland(size, size, 1, 2);
-//				noiseMap = iGen.getMap();
-//				repaint();
-//			}else if (key == KeyEvent.VK_1) {
-//				iGen.generateIsland(size, size, 1, 4);
-//				noiseMap = iGen.getMap();
-//				repaint();
-//			}else if (key == KeyEvent.VK_2) {
-//				iGen.generateIsland(size, size, 1, 8);
-//				noiseMap = iGen.getMap();
-//				repaint();
-//			}else if (key == KeyEvent.VK_3) {
-//				iGen.generateIsland(size, size, 1, 16);
-//				noiseMap = iGen.getMap();
-//				repaint();
-//			}
+
 		}
 
 		@Override
 		public void keyReleased(KeyEvent arg0) {
-			// int key = arg0.getKeyCode();
-			// System.out.println(key);
 		}
 
 		@Override
 		public void keyTyped(KeyEvent arg0) {
-			// int key = arg0.getKeyCode();
-			// System.out.println(key);
-			// if (key == KeyEvent.VK_SPACE) {
-			// IslandGenerator iGen = new IslandGenerator(size, size);
-			// iGen.generateIsland(size, size, 1, 16);
-			// noiseMap = iGen.getMap();
-			//
-			// repaint();
-			// }
 		}
 	}
 }

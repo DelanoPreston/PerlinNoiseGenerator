@@ -30,7 +30,7 @@ public class IslandGenerator {
 	}
 
 	// @SuppressWarnings("static-access")
-	public double[][] generateIsland(int inWid, int inHei, int inFreq, int inOct) {
+	public double[][] generateIsland(int inWid, int inHei, double inFreq, int inOct) {
 		// generator noise
 		PerlinNoise png;// = new PerlinNoise(height, width, seed);
 		Random random;// = new Random(seed);
@@ -57,14 +57,14 @@ public class IslandGenerator {
 		//
 		// not sure
 		for (int i = 0; i < (height * width) * .85; i++) {
-//			int x = (int)((random.nextInt(width) - (width/2)) * .75) + (width/2);//(width / 16) + random.nextInt(width - (width / 8));// rand from 15 to width-16
-//			int y = (int)((random.nextInt(height) - (height/2)) * .75) + (height/2);//(height / 16) + random.nextInt(height - (height / 8));// rand from 15 to width-16
+//			int x = (int)((random.nextInt(width) - (width/2)) * .55) + (width/2);//(width / 16) + random.nextInt(width - (width / 8));// rand from 15 to width-16
+//			int y = (int)((random.nextInt(height) - (height/2)) * .55) + (height/2);//(height / 16) + random.nextInt(height - (height / 8));// rand from 15 to width-16
 			int x = (width / 16) + random.nextInt(width - (width / 8));// rand from 15 to width-16
 			int y = (height / 16) + random.nextInt(height - (height / 8));// rand from 15 to width-16
 //			 int x = random.nextInt(width);
 //			 int y = random.nextInt(height);
 
-			for (int j = 0; j < (height * width); j++) {
+			for (int j = 0; j < (height * width) * .15; j++) {
 //				 System.out.println(j + "," + i);
 				particleMap[y][x] += 7;
 				if (particleMap[y][x] >= 255)
@@ -119,13 +119,9 @@ public class IslandGenerator {
 			}
 		}
 
-		for (int y = 0; y < 5; y++) {
+		for (int y = 0; y < 4; y++) {
 			smoothen();
 		}
-		// smoothen();
-		// smoothen();
-		// smoothen();
-		// smoothen();
 
 		return map;
 	}

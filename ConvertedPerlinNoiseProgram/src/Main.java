@@ -8,7 +8,7 @@ public class Main {
 		
 		JFrame frame = new JFrame();
 		MyPanel jPanel = new MyPanel();
-		frame.setSize(400, 425);
+		frame.setSize(600, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);

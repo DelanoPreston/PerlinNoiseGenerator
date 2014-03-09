@@ -20,7 +20,7 @@ public class PerlinNoise {
 		random = new Random(seed);
 	}
 
-	public double[][] generate_noise(int width, int height, int frequency, int octaves) {
+	public double[][] generate_noise(int width, int height, double frequency, int octaves) {
 
 		// """Generates a 2d array of random noise."""
 
@@ -45,13 +45,13 @@ public class PerlinNoise {
 		return noise;
 	}
 
-	public double smooth_noise(int x, int y) {
+	public double smooth_noise(double x, double y) {
 
 		// Returns the average value of the 4 neighbors of (x, y) from the
 		// noise array.
 
-		int fractX = x - (int) x;
-		int fractY = y - (int) y;
+		int fractX = (int) (x - x);
+		int fractY = (int) (y - y);
 
 		int x1 = ((int) x + this.noise_width) % this.noise_width;
 		int y1 = ((int) y + this.noise_height) % this.noise_height;
@@ -68,7 +68,7 @@ public class PerlinNoise {
 		return value;
 	}
 
-	public double turbulence(int x, int y, int size) {
+	public double turbulence(double x, double y, int size) {
 
 		// """This function controls how far we zoom in/out of the noise array.
 		// The further zoomed in gives less detail and is more blurry."""
