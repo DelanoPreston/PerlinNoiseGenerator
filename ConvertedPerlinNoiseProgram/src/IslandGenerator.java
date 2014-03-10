@@ -6,9 +6,14 @@ public class IslandGenerator {
 	int height;
 	int width;
 	int seed;
+	int smoothen;
 	double[][] map;
 	double[][] particleMap;
-
+	
+	public void setSmooth(int in){
+		smoothen = in;
+	}
+	
 	public double[][] getMap() {
 		return particleMap;
 	}
@@ -17,6 +22,7 @@ public class IslandGenerator {
 		width = inWid;
 		height = inHei;
 		seed = 0;
+		smoothen = 4;
 		map = new double[height][width];
 		particleMap = new double[height][width];
 	}
@@ -119,7 +125,7 @@ public class IslandGenerator {
 			}
 		}
 
-		for (int y = 0; y < 4; y++) {
+		for (int y = 0; y < smoothen; y++) {
 			smoothen();
 		}
 
