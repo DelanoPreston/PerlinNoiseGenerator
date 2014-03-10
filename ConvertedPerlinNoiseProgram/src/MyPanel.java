@@ -82,22 +82,14 @@ public class MyPanel extends JPanel {
 							g.setColor(new Color((int) temp, (int) temp, (int) temp, 255));
 						}
 
-						// g.setColor(new Color((int) temp, (int) temp, (int) temp, 255));
+//						 g.setColor(new Color((int) temp, (int) temp, (int) temp, 255));
 						g.fillRect(j * boxSize, i * boxSize, boxSize, boxSize);
 					} else {
 						System.out.println("oops");
 					}
-
-					// temp = temp + 1;
-					// temp = temp * .5;
-					// temp = temp* 255;
-
-					// g.drawRect(j * 16, i * 16, 16, 16);
-
 				}
 			}
 		}
-
 	}
 
 	/**
